@@ -29,7 +29,14 @@ if(isset($_POST['submit'])){
       elseif($row['user_type'] == 'courier')
       {
          $_SESSION['courier_id'] = $row['id'];
+         $_SESSION['courier_name'] = $row['name'];
+         $_SESSION['courier_email'] = $row['email'];
          header('location:courier_home.php');
+      }
+      elseif($row['user_type'] == 'kitchen')
+      {
+         $_SESSION['kitchen_id'] = $row['id'];
+         header('location:kitchen_home.php');
       }
       elseif($row['user_type'] == 'user'){
 

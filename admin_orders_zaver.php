@@ -77,10 +77,13 @@ if(isset($_GET['delete'])){
             <input type="hidden" name="order_id" value="<?= $fetch_orders['id']; ?>">
             <select name="update_payment" class="drop-down">
                <option value="" selected disabled><?= $fetch_orders['payment_status']; ?></option>
-               <option value="pending">рассматриваемый</option>
-               <option value="cook">готовится</option>
-               <option value="given_to_the_courier">отдан курьеру</option>
-               <option value="completed">завершённый</option>
+               <option value="рассматривается">рассматривается</option>
+               <option value="заказ передан кухне">заказ передан кухне</option>
+               <option value="заказ готовится">заказ готовится</option>
+               <option value="ожидаем курьера">ожидаем курьера</option>
+               <option value="курьер забрал заказ">курьер забрал заказ</option>
+               <option value="курьер в пути">курьер в пути</option>
+               <option value="завершен">завершен</option>
             </select>
             <div class="flex-btn">
                <input type="submit" name="update_order" class="option-btn" value="обновить">
