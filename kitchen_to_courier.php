@@ -4,18 +4,17 @@
 
 session_start();
 
-$courier_id = $_SESSION['courier_id'];
-$courier_name = $_SESSION['courier_name'];
-$courier_email = $_SESSION['courier_email'];
-$order_status = 'курьер забрал заказ';
-if(!isset($courier_id)){
+$kitchen_id = $_SESSION['kitchen_id'];
+
+$order_status = 'курьер в пути';
+if(!isset($kitchen_id)){
    header('location:login.php');
 };
 
-if(isset($_POST['accept'])){
-    $update_orders = $conn->prepare("UPDATE `orders` SET courier_name = ?, courier_email = ?, payment_status = ? WHERE id = ?");
-    $update_orders->execute([$courier_name, $courier_email, $order_status, $_POST['order_id']]);
-    $message[] = 'Курьер принял заказ!';
+if(isset($_POST['transfer'])){
+    $update_orders = $conn->prepare("UPDATE `orders` SET payment_status = ? WHERE id = ?");
+    $update_orders->execute([$order_status, $_POST['order_id']]);
+    $message[] = 'Подтвердить передачу заказа курьеру';
 };
 
 if(isset($_GET['delete'])){
@@ -48,7 +47,7 @@ if(isset($_GET['delete'])){
 </head>
 <body>
    
-<?php include 'courier_header.php'; ?>
+<?php include 'kitchen_header.php'; ?>
 
 <section class="placed-orders">
 
@@ -57,7 +56,7 @@ if(isset($_GET['delete'])){
    <div class="box-container">
 
       <?php
-         $select_orders = $conn->prepare("SELECT * FROM `orders` WHERE payment_status = 'ожидаем курьера'");
+         $select_orders = $conn->prepare("SELECT * FROM `orders` WHERE payment_status = 'курьер забрал заказ'");
          $select_orders->execute();
          if($select_orders->rowCount() > 0){
             while($fetch_orders = $select_orders->fetch(PDO::FETCH_ASSOC)){
@@ -77,8 +76,11 @@ if(isset($_GET['delete'])){
 
          <form action="" method="POST">
             <input type="hidden" name="order_id" value="<?= $fetch_orders['id']; ?>">
+            <select name="update_payment" class="drop-down">
+               <option value="" selected disabled><?= $fetch_orders['payment_status']; ?></option>
+            </select>
             <div class="flex-btn">
-               <input type="submit" name="accept" class="option-btn" value="принять">
+               <input type="submit" name="transfer" class="option-btn" value="Подтвердить">
             </div>
          </form>
       </div>

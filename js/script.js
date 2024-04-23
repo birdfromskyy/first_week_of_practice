@@ -21,7 +21,7 @@ function showPastOrders() {
    document.getElementById('pastOrders').style.display = 'block';
  }
  
- 
+ // Показать заказы при загрузке страницы
  document.addEventListener('DOMContentLoaded', function() {
    document.querySelectorAll('.past-order').forEach(item => {
      item.addEventListener('click', function() {

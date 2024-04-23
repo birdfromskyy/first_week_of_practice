@@ -10,35 +10,6 @@ if(!isset($user_id)){
    header('location:login.php');
 };
 
-if(isset($_POST['add_to_wishlist'])){
-
-   $pid = $_POST['pid'];
-   $pid = filter_var($pid, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
-   $p_name = $_POST['p_name'];
-   $p_name = filter_var($p_name, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
-   $p_price = $_POST['p_price'];
-   $p_price = filter_var($p_price, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
-   $p_image = $_POST['p_image'];
-   $p_image = filter_var($p_image, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
-
-   $check_wishlist_numbers = $conn->prepare("SELECT * FROM `wishlist` WHERE name = ? AND user_id = ?");
-   $check_wishlist_numbers->execute([$p_name, $user_id]);
-
-   $check_cart_numbers = $conn->prepare("SELECT * FROM `cart` WHERE name = ? AND user_id = ?");
-   $check_cart_numbers->execute([$p_name, $user_id]);
-
-   if($check_wishlist_numbers->rowCount() > 0){
-      $message[] = 'already added to wishlist!';
-   }elseif($check_cart_numbers->rowCount() > 0){
-      $message[] = 'already added to cart!';
-   }else{
-      $insert_wishlist = $conn->prepare("INSERT INTO `wishlist`(user_id, pid, name, price, image) VALUES(?,?,?,?,?)");
-      $insert_wishlist->execute([$user_id, $pid, $p_name, $p_price, $p_image]);
-      $message[] = 'added to wishlist!';
-   }
-
-}
-
 if(isset($_POST['add_to_cart'])){
 
    $pid = $_POST['pid'];
@@ -56,7 +27,7 @@ if(isset($_POST['add_to_cart'])){
    $check_cart_numbers->execute([$p_name, $user_id]);
 
    if($check_cart_numbers->rowCount() > 0){
-      $message[] = 'already added to cart!';
+      $message[] = 'Уже было добавлено в корзину!';
    }else{
 
       $check_wishlist_numbers = $conn->prepare("SELECT * FROM `wishlist` WHERE name = ? AND user_id = ?");
@@ -69,8 +40,25 @@ if(isset($_POST['add_to_cart'])){
 
       $insert_cart = $conn->prepare("INSERT INTO `cart`(user_id, pid, name, price, quantity, image) VALUES(?,?,?,?,?,?)");
       $insert_cart->execute([$user_id, $pid, $p_name, $p_price, $p_qty, $p_image]);
-      $message[] = 'added to cart!';
+      $message[] = 'Добавлено в корзину!';
    }
+
+}
+
+if(isset($_GET['delete'])){
+
+   $delete_id = $_GET['delete'];
+   $delete_wishlist_item = $conn->prepare("DELETE FROM `wishlist` WHERE id = ?");
+   $delete_wishlist_item->execute([$delete_id]);
+   header('location:wishlist.php');
+
+}
+
+if(isset($_GET['delete_all'])){
+
+   $delete_wishlist_item = $conn->prepare("DELETE FROM `wishlist` WHERE user_id = ?");
+   $delete_wishlist_item->execute([$user_id]);
+   header('location:wishlist.php');
 
 }
 
@@ -82,7 +70,7 @@ if(isset($_POST['add_to_cart'])){
    <meta charset="UTF-8">
    <meta http-equiv="X-UA-Compatible" content="IE=edge">
    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-   <title>quick view</title>
+   <title>wishlist</title>
 
    <!-- font awesome cdn link  -->
    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
@@ -95,36 +83,46 @@ if(isset($_POST['add_to_cart'])){
    
 <?php include 'header.php'; ?>
 
-<section class="quick-view">
+<section class="wishlist">
 
+   <h1 class="title">Добавленные продукты</h1>
 
-   <a href="shop.php" class="btn1">продолжить покупку</a>
+   <div class="box-container">
+
    <?php
-      $pid = $_GET['pid'];
-      $select_products = $conn->prepare("SELECT * FROM `products` WHERE id = ?");
-      $select_products->execute([$pid]);
-      if($select_products->rowCount() > 0){
-         while($fetch_products = $select_products->fetch(PDO::FETCH_ASSOC)){ 
+      $grand_total = 0;
+      $select_wishlist = $conn->prepare("SELECT * FROM `wishlist` WHERE user_id = ?");
+      $select_wishlist->execute([$user_id]);
+      if($select_wishlist->rowCount() > 0){
+         while($fetch_wishlist = $select_wishlist->fetch(PDO::FETCH_ASSOC)){ 
    ?>
-   <form action="" class="box" method="POST">
-      <div class="price">$<span><?= $fetch_products['price']; ?></span>/-</div>
-      <img src="uploaded_img/<?= $fetch_products['image']; ?>" alt="">
-      <div class="name"><?= $fetch_products['name']; ?></div>
-      <div class="details"><?= $fetch_products['details']; ?></div>
-      <input type="hidden" name="pid" value="<?= $fetch_products['id']; ?>">
-      <input type="hidden" name="p_name" value="<?= $fetch_products['name']; ?>">
-      <input type="hidden" name="p_price" value="<?= $fetch_products['price']; ?>">
-      <input type="hidden" name="p_image" value="<?= $fetch_products['image']; ?>">
-      <input type="number" min="1" value="1" name="p_qty" class="qty">
-      <input type="submit" value="в Избранные" class="option-btn" name="add_to_wishlist">
-      <input type="submit" value="в Корзину" class="btn" name="add_to_cart">
+   <form action="" method="POST" class="box">
+      <a href="wishlist.php?delete=<?= $fetch_wishlist['id']; ?>" class="fas fa-times" onclick="return confirm('delete this from wishlist?');"></a>
+      <a href="view_page.php?pid=<?= $fetch_wishlist['pid']; ?>" class="fas fa-eye"></a>
+      <img src="uploaded_img/<?= $fetch_wishlist['image']; ?>" alt="">
+      <div class="name"><?= $fetch_wishlist['name']; ?></div>
+      <div class="price">$<?= $fetch_wishlist['price']; ?>/-</div>
+      <input type="number" min="1" value="1" class="qtsy" name="p_qty">
+      <input type="hidden" name="pid" value="<?= $fetch_wishlist['pid']; ?>">
+      <input type="hidden" name="p_name" value="<?= $fetch_wishlist['name']; ?>">
+      <input type="hidden" name="p_price" value="<?= $fetch_wishlist['price']; ?>">
+      <input type="hidden" name="p_image" value="<?= $fetch_wishlist['image']; ?>">
+      <input type="submit" value="В корзину" name="add_to_cart" class="btn">
    </form>
    <?php
-         }
-      }else{
-         echo '<p class="empty">no products added yet!</p>';
+      $grand_total += $fetch_wishlist['price'];
       }
+   }else{
+      echo '<p class="empty">В Избранных ничего нет</p>';
+   }
    ?>
+   </div>
+
+   <div class="wishlist-total">
+      <p>Итого : <span>$<?= $grand_total; ?>/-</span></p>
+      <a href="shop.php" class="option-btn">продолжить покупку</a>
+      <a href="wishlist.php?delete_all" class="delete-btn <?= ($grand_total > 1)?'':'disabled'; ?>">удалить</a>
+   </div>
 
 </section>
 

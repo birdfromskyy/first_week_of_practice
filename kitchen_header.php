@@ -20,9 +20,9 @@ if(isset($message)){
       <img src="images/logo2.png" alt="KING-FOOD" width="190" height="40" >
 
       <nav class="navbar">
-         <a href="courier_home.php">ГЛАВНАЯ</a>
-         <a href="courier_orders_nezaver.php">ЗАКАЗЫ</a>
-         <a href="courier_active_orders.php">АКТИВНЫЕ ЗАКАЗЫ</a>
+         <a href="kitchen_home.php">ГЛАВНАЯ</a>
+         <a href="kitchen_orders_nezaver.php">ЗАКАЗЫ</a>
+         <a href="kitchen_to_courier.php">ПОДТВЕРДИТЬ ЗАКАЗЫ</a>
       </nav>
 
       <div class="icons">
@@ -44,9 +44,9 @@ if(isset($message)){
          
          <?php
             $count_cart_items = $conn->prepare("SELECT * FROM `cart` WHERE user_id = ?");
-            $count_cart_items->execute([$courier_id]);
+            $count_cart_items->execute([$kitchen_id]);
             $count_wishlist_items = $conn->prepare("SELECT * FROM `wishlist` WHERE user_id = ?");
-            $count_wishlist_items->execute([$courier_id]);
+            $count_wishlist_items->execute([$kitchen_id]);
          ?>
 
       </div>
@@ -54,7 +54,7 @@ if(isset($message)){
       <div class="profile">
          <?php
             $select_profile = $conn->prepare("SELECT * FROM `users` WHERE id = ?");
-            $select_profile->execute([$courier_id]);
+            $select_profile->execute([$kitchen_id]);
             $fetch_profile = $select_profile->fetch(PDO::FETCH_ASSOC);
          ?>
          <img src="uploaded_img/<?= $fetch_profile['image']; ?>" alt="">

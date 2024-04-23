@@ -4,18 +4,21 @@
 
 session_start();
 
-$courier_id = $_SESSION['courier_id'];
-$courier_name = $_SESSION['courier_name'];
-$courier_email = $_SESSION['courier_email'];
-$order_status = 'курьер забрал заказ';
-if(!isset($courier_id)){
+$kitchen_id = $_SESSION['kitchen_id'];
+
+if(!isset($kitchen_id)){
    header('location:login.php');
 };
 
-if(isset($_POST['accept'])){
-    $update_orders = $conn->prepare("UPDATE `orders` SET courier_name = ?, courier_email = ?, payment_status = ? WHERE id = ?");
-    $update_orders->execute([$courier_name, $courier_email, $order_status, $_POST['order_id']]);
-    $message[] = 'Курьер принял заказ!';
+if(isset($_POST['update_order'])){
+
+   $order_id = $_POST['order_id'];
+   $update_payment = $_POST['update_payment'];
+   $update_payment = filter_var($update_payment, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+   $update_orders = $conn->prepare("UPDATE `orders` SET payment_status = ? WHERE id = ?");
+   $update_orders->execute([$update_payment, $order_id]);
+   $message[] = 'payment has been updated!';
+
 };
 
 if(isset($_GET['delete'])){
@@ -28,8 +31,6 @@ if(isset($_GET['delete'])){
 }
 
 ?>
-
-
 
 <!DOCTYPE html>
 <html lang="en">
@@ -48,7 +49,7 @@ if(isset($_GET['delete'])){
 </head>
 <body>
    
-<?php include 'courier_header.php'; ?>
+<?php include 'kitchen_header.php'; ?>
 
 <section class="placed-orders">
 
@@ -57,7 +58,7 @@ if(isset($_GET['delete'])){
    <div class="box-container">
 
       <?php
-         $select_orders = $conn->prepare("SELECT * FROM `orders` WHERE payment_status = 'ожидаем курьера'");
+         $select_orders = $conn->prepare("SELECT * FROM `orders` WHERE payment_status = 'заказ передан кухне' OR payment_status = 'заказ готовится' OR payment_status = 'ожидаем курьера'");
          $select_orders->execute();
          if($select_orders->rowCount() > 0){
             while($fetch_orders = $select_orders->fetch(PDO::FETCH_ASSOC)){
@@ -77,8 +78,17 @@ if(isset($_GET['delete'])){
 
          <form action="" method="POST">
             <input type="hidden" name="order_id" value="<?= $fetch_orders['id']; ?>">
+            <select name="update_payment" class="drop-down">
+               <option value="" selected disabled><?= $fetch_orders['payment_status']; ?></option>
+               <option value="заказ передан кухне">заказ передан кухне</option>
+               <option value="заказ готовится">заказ готовится</option>
+               <option value="ожидаем курьера">ожидаем курьера</option>
+               <option value="курьер забрал заказ">курьер забрал заказ</option>
+               <option value="курьер в пути">курьер в пути</option>
+               <option value="завершен">завершен</option>
+            </select>
             <div class="flex-btn">
-               <input type="submit" name="accept" class="option-btn" value="принять">
+               <input type="submit" name="update_order" class="option-btn" value="обновить">
             </div>
          </form>
       </div>
