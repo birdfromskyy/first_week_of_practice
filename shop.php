@@ -70,10 +70,10 @@ if(isset($_POST['add_to_cart'])){
    <meta name="viewport" content="width=device-width, initial-scale=1.0">
    <title>shop</title>
 
-   <!-- font awesome cdn link  -->
+   
    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
 
-   <!-- custom css file link  -->
+   
    <link rel="stylesheet" href="css/style.css">
 
 </head>
@@ -83,10 +83,10 @@ if(isset($_POST['add_to_cart'])){
 
 <section class="p-category">
 
-   <a href="category.php?category=fruits">Напитки</a>
-   <a href="category.php?category=vegitables">Пицца</a>
-   <a href="category.php?category=fish">Закуски</a>
-   <a href="category.php?category=meat">Бургеры</a>
+   <a href="category.php?category=napitki">Напитки</a>
+   <a href="category.php?category=pizza">Пицца</a>
+   <a href="category.php?category=zakuski">Закуски</a>
+   <a href="category.php?category=burger">Бургеры</a>
 
 </section>
 
@@ -105,7 +105,7 @@ if(isset($_POST['add_to_cart'])){
    <form action="" class="box" method="POST">
       <div class="price">$<span><?= $fetch_products['price']; ?></span>/-</div>
       <a href="view_page.php?pid=<?= $fetch_products['id']; ?>" class="fas fa-eye"></a>
-      <img src="uploaded_img/<?= $fetch_products['image']; ?>" alt="">
+      <img src="uploaded_img/<?= $fetch_products['image']; ?>" alt="" width="900" height="200">
       <div class="name"><?= $fetch_products['name']; ?></div>
       <input type="hidden" name="pid" value="<?= $fetch_products['id']; ?>">
       <input type="hidden" name="p_name" value="<?= $fetch_products['name']; ?>">

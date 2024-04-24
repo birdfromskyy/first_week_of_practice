@@ -20,10 +20,10 @@ if(!isset($user_id)){
    <meta name="viewport" content="width=device-width, initial-scale=1.0">
    <title>orders</title>
 
-   <!-- font awesome cdn link  -->
+   
    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
 
-   <!-- custom css file link  -->
+   
    <link rel="stylesheet" href="css/style.css">
 
 </head>
@@ -51,10 +51,10 @@ if(!isset($user_id)){
          <p>Адрес дом: <span><?= $fetch_orders['flat']; ?></span></p>
          <p>Квартира: <span><?= $fetch_orders['street']; ?></span></p>
          <p>Город: <span><?= $fetch_orders['city']; ?></span></p>
+         <p>Пожелания: <span><?= $fetch_orders['pin']; ?></span></p>
          <p>Способ оплаты: <span><?= $fetch_orders['method']; ?></span></p>
          <p>Продукты: <span><?= $fetch_orders['total_products']; ?></span></p>
          <p>Всего: <span>$<?= $fetch_orders['total_price']; ?></span></p>
-         <p>Пожелания: <span><?= $fetch_orders['comment']; ?></span></p>
          <p>Статус оплаты: <span style="color:<?php if($fetch_orders['payment_status'] == 'pending'){ echo 'red'; }else{ echo 'green'; }; ?>"><?= $fetch_orders['payment_status']; ?></span></p>
       </div>
    <?php

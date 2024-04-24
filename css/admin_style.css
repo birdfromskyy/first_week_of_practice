@@ -4,36 +4,36 @@
    display: grid;
    grid-template-columns: repeat(auto-fit, minmax(27rem, 1fr));
    gap: 1.5rem;
-   align-items: center; /* Центрируем по вертикали */
-   justify-content: center; /* Центрируем по горизонтали */
+   align-items: center; 
+   justify-content: center; 
 }
 
 .dashboard .box-container .box {
    padding: 2rem;
    text-align: center;
-   border: none; /* Убираем границу */
-   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1); /* Немного более мягкая тень */
+   border: none; 
+   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1); 
    background-color: var(--white);
    border-radius: 1rem;
-   overflow: hidden; /* Скрываем выходящие за границы дочерние элементы */
-   transition: box-shadow 0.3s ease, transform 0.3s ease; /* Плавные переходы тени и трансформации */
+   overflow: hidden; 
+   transition: box-shadow 0.3s ease, transform 0.3s ease; 
 }
 
 .dashboard .box-container .box:hover {
-   box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2); /* Увеличиваем тень при наведении */
-   transform: translateY(-5px); /* Поднимаем блок при наведении */
+   box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2); 
+   transform: translateY(-5px); 
 }
 
 .dashboard .box-container .box h3 {
-   font-size: 2.5rem; /* Слегка уменьшил размер заголовка */
+   font-size: 2.5rem; 
    color: var(--black);
-   margin-bottom: 1rem; /* Добавил немного отступа снизу */
+   margin-bottom: 1rem; 
 }
 
 .dashboard .box-container .box p {
-   font-size: 1.6rem; /* Немного уменьшил размер текста */
+   font-size: 1.6rem; 
    color: var(--black);
-   margin: 0; /* Убрал внешние отступы */
+   margin: 0; 
 }
 
 
@@ -43,46 +43,46 @@
    padding: 2rem;
    margin: 0 auto;
    text-align: center;
-   border: none; /* Убираем границу */
-   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1); /* Немного более мягкая тень */
+   border: none; 
+   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1); 
    background-color: var(--white);
    border-radius: 1rem;
-   overflow: hidden; /* Скрываем выходящие за границы дочерние элементы */
+   overflow: hidden; 
 }
 
 .add-products form .flex {
    display: flex;
    justify-content: space-between;
    flex-wrap: wrap;
-   margin-bottom: 1.5rem; /* Увеличиваем отступ между элементами */
+   margin-bottom: 1.5rem; 
 }
 
 .add-products form .flex .inputBox {
-   width: calc(50% - 0.75rem); /* Уменьшаем ширину с учетом отступов */
+   width: calc(50% - 0.75rem); 
 }
 
 .add-products form .box {
    width: 100%;
    margin: 1rem 0;
-   padding: 1.5rem 2rem; /* Немного увеличиваем внутренние отступы */
+   padding: 1.5rem 2rem; 
    font-size: 1.8rem;
    color: var(--black);
    border-radius: .5rem;
    background-color: var(--light-bg);
    border: var(--border);
-   transition: all 0.3s ease; /* Плавные переходы */
+   transition: all 0.3s ease; 
 }
 
 .add-products form .box:focus {
-   outline: none; /* Убираем фокусировку */
-   border-color: var(--primary-color); /* Изменяем цвет границы при фокусировке */
+   outline: none; 
+   border-color: var(--primary-color); 
 }
 
 .add-products form textarea {
    height: 20rem;
-   width: calc(100% - 3.5rem); /* Уменьшаем ширину с учетом внутренних отступов */
+   width: calc(100% - 3.5rem); 
    resize: none;
-   margin-bottom: 1rem; /* Добавляем отступ снизу */
+   margin-bottom: 1rem; 
 }
 
 .show-products {
@@ -92,7 +92,7 @@
 .show-products .box-container {
    display: grid;
    grid-template-columns: repeat(auto-fit, minmax(27rem, 1fr));
-   grid-auto-columns: 27rem; /* Задаем фиксированную ширину для блоков */
+   grid-auto-columns: 27rem; 
    gap: 1.5rem;
    justify-content: center;
    align-items: flex-start;
@@ -114,14 +114,14 @@
    top: 1rem; 
    left: 1rem;
    padding: 1rem 2rem;
-   border-radius: 5rem; /* Сглаженные края для более современного вида */
-   color: #fff; /* Белый текст */
+   border-radius: 5rem; 
+   color: #fff; 
    font-size: 1.8rem;
-   background: linear-gradient(135deg, #f90, #f60); /* Оранжевый градиент */
-   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5); /* Тень для добавления глубины */
-   transition: all 0.3s ease; /* Анимация для плавности переходов */
-   transform: translateY(-5px) scale(1.05); /* Подъем и увеличение при наведении */
-   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.7); /* Более глубокая тень при наведении */
+   background: linear-gradient(135deg, #f90, #f60); 
+   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5); 
+   transition: all 0.3s ease; 
+   transform: translateY(-5px) scale(1.05); 
+   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.7); 
 }
 
 
@@ -149,8 +149,8 @@
 
 .show-products .box-container .box img {
    width: 100%;
-   height: 15rem; /* Задаем фиксированную высоту */
-   object-fit: contain; /* Используем contain для масштабирования без обрезки */
+   height: 15rem; 
+   object-fit: contain; 
    margin-bottom: 1rem;
 }
 

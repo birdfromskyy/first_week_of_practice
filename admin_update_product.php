@@ -10,8 +10,10 @@ if(!isset($admin_id)){
    header('location:login.php');
 };
 
+
 if(isset($_POST['update_product'])){
 
+   
    $pid = $_POST['pid'];
    $name = $_POST['name'];
    $name = filter_var($name, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
@@ -22,35 +24,42 @@ if(isset($_POST['update_product'])){
    $details = $_POST['details'];
    $details = filter_var($details, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
 
-   $image = $_FILES['image']['name'];
-   $image = filter_var($image, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
-   $image_size = $_FILES['image']['size'];
-   $image_tmp_name = $_FILES['image']['tmp_name'];
-   $image_folder = 'uploaded_img/'.$image;
-   $old_image = $_POST['old_image'];
+  
+   if(isset($_FILES['image']['name']) && !empty($_FILES['image']['name'])) {
+      $image = $_FILES['image']['name'];
+      $image = filter_var($image, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+      $image_size = $_FILES['image']['size'];
+      $image_tmp_name = $_FILES['image']['tmp_name'];
+      $image_folder = 'uploaded_img/'.$image;
+   } else {
+    
+      $image = $_POST['old_image'];
+   }
 
-   $update_product = $conn->prepare("UPDATE `products` SET name = ?, category = ?, details = ?, price = ? WHERE id = ?");
-   $update_product->execute([$name, $category, $details, $price, $pid]);
+  
+   $update_product = $conn->prepare("UPDATE `products` SET name = ?, category = ?, details = ?, price = ?, image = ? WHERE id = ?");
+   $update_product->execute([$name, $category, $details, $price, $image, $pid]);
 
-   $message[] = 'product updated successfully!';
+  
+   $message[] = 'Продукт успешно обновлен!';
 
-   if(!empty($image)){
+   if(isset($_FILES['image']['name']) && !empty($_FILES['image']['name'])) {
       if($image_size > 2000000){
-         $message[] = 'image size is too large!';
-      }else{
+         $message[] = 'Размер изображения слишком большой!';
+      } else {
+         move_uploaded_file($image_tmp_name, $image_folder);
 
-         $update_image = $conn->prepare("UPDATE `products` SET image = ? WHERE id = ?");
-         $update_image->execute([$image, $pid]);
-
-         if($update_image){
-            move_uploaded_file($image_tmp_name, $image_folder);
-            unlink('uploaded_img/'.$old_image);
-            $message[] = 'image updated successfully!';
+         if(file_exists('uploaded_img/'.$_POST['old_image'])) {
+            unlink('uploaded_img/'.$_POST['old_image']);
+            $message[] = 'Старое изображение успешно удалено!';
+         } else {
+            $message[] = 'Старое изображение не найдено!';
          }
       }
    }
-
 }
+
+
 
 ?>
 
@@ -62,10 +71,10 @@ if(isset($_POST['update_product'])){
    <meta name="viewport" content="width=device-width, initial-scale=1.0">
    <title>update products</title>
 
-   <!-- font awesome cdn link  -->
+  
    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
 
-   <!-- custom css file link  -->
+   
    <link rel="stylesheet" href="css/admin_style.css">
 
 </head>
@@ -91,11 +100,11 @@ if(isset($_POST['update_product'])){
       <input type="text" name="name" placeholder="Введите название продукта" required class="box" value="<?= $fetch_products['name']; ?>">
       <input type="number" name="price" min="0" placeholder="Введите цену продукта" required class="box" value="<?= $fetch_products['price']; ?>">
       <select name="category" class="box" required>
-         <option selected></option>
-         <option value="vegitables">Бургеры</option>
-         <option value="fruits">Пицца</option>
-         <option value="meat">Напитки</option>
-         <option value="fish">Закуски</option>
+         <option value="" selected disabled>Выберите категорию</option>
+            <option value="pizza">Пицца</option>
+            <option value="napitki">Напитки</option>
+            <option value="burger">Бургеры</option>
+            <option value="zakuski">Закуски</option>
       </select>
       <textarea name="details" required placeholder="enter product details" class="box" cols="10" rows="1"><?= $fetch_products['details']; ?></textarea>
       <input type="file" name="image" class="box" accept="image/jpg, image/jpeg, image/png">

@@ -26,8 +26,8 @@ if(isset($_POST['order'])){
    $street = filter_var($street, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
    $city = $_POST['city'];
    $city = filter_var($city, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
-   $comment = $_POST['comment'];
-   $comment = filter_var($comment, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+   $pin = $_POST['pin'];
+   $pin = filter_var($pin, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
    
    $placed_on = date('d-M-Y');
 
@@ -46,16 +46,16 @@ if(isset($_POST['order'])){
 
    $total_products = implode(', ', $cart_products);
 
-   $order_query = $conn->prepare("SELECT * FROM `orders` WHERE name = ? AND number = ? AND email = ? AND method = ? AND flat = ? AND street = ? AND city = ? AND comment = ? AND total_products = ? AND total_price = ?");
-   $order_query->execute([$name, $number, $email, $method, $flat, $street, $city, $comment, $total_products, $cart_total]);
+   $order_query = $conn->prepare("SELECT * FROM `orders` WHERE name = ? AND number = ? AND email = ? AND method = ? AND flat = ? AND street = ? AND city = ? AND pin = ? AND total_products = ? AND total_price = ?");
+   $order_query->execute([$name, $number, $email, $method, $flat, $street, $city, $pin, $total_products, $cart_total]);
 
    if($cart_total == 0){
       $message[] = 'Корзина пустая';
    }elseif($order_query->rowCount() > 0){
       $message[] = 'заказ уже размещен!';
    }else{
-      $insert_order = $conn->prepare("INSERT INTO `orders`(user_id, name, number, email, method, flat, street, city, comment, total_products, total_price, placed_on) VALUES(?,?,?,?,?,?,?,?,?,?,?,?)");
-      $insert_order->execute([$user_id, $name, $number, $email, $method, $flat, $street, $city, $comment, $total_products, $cart_total, $placed_on]);
+      $insert_order = $conn->prepare("INSERT INTO `orders`(user_id, name, number, email, method, flat, street, city, pin, total_products, total_price, placed_on) VALUES(?,?,?,?,?,?,?,?,?,?,?,?)");
+      $insert_order->execute([$user_id, $name, $number, $email, $method, $flat, $street, $city, $pin, $total_products, $cart_total, $placed_on]);
       $delete_cart = $conn->prepare("DELETE FROM `cart` WHERE user_id = ?");
       $delete_cart->execute([$user_id]);
       $message[] = 'order placed successfully!';
@@ -71,7 +71,7 @@ $order_method = isset($_SESSION['order_method']) ? $_SESSION['order_method'] : '
 $order_flat = isset($_SESSION['order_flat']) ? $_SESSION['order_flat'] : '';
 $order_street = isset($_SESSION['order_street']) ? $_SESSION['order_street'] : '';
 $order_city = isset($_SESSION['order_city']) ? $_SESSION['order_city'] : '';
-$order_comment = isset($_SESSION['order_comment']) ? $_SESSION['order_comment'] : '';
+$order_pin = isset($_SESSION['order_pin']) ? $_SESSION['order_pin'] : '';
 
 ?>
 
@@ -83,10 +83,10 @@ $order_comment = isset($_SESSION['order_comment']) ? $_SESSION['order_comment'] 
    <meta name="viewport" content="width=device-width, initial-scale=1.0">
    <title>checkout</title>
 
-   <!-- font awesome cdn link  -->
+   
    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
 
-   <!-- custom css file link  -->
+   
    <link rel="stylesheet" href="css/style.css">
 
 </head>
@@ -157,13 +157,14 @@ $order_comment = isset($_SESSION['order_comment']) ? $_SESSION['order_comment'] 
          </div>
          <div class="inputBox">
             <span>пожелания :</span>
-            <input type="text" name="comment" value="<?= $order_comment ?>" placeholder="" class="box">
+            <input type="text" name="pin" value="<?= $order_pin ?>" placeholder="" class="box" >
          </div>
       </div>
 
 
       <input type="submit" name="order" class="btn <?= ($cart_grand_total > 1)?'':'disabled'; ?>" value="заказать">
       <button onclick="showPastOrders()">Показать прошлые заказы</button>
+      
       <div id="pastOrders" style="display:none;">
          <?php
             $select_orders = $conn->prepare("SELECT * FROM `orders` WHERE user_id = ?");
@@ -179,10 +180,10 @@ $order_comment = isset($_SESSION['order_comment']) ? $_SESSION['order_comment'] 
             <p>Адрес дом: <span><?= $fetch_orders['flat']; ?></span></p>
             <p>Квартира: <span><?= $fetch_orders['street']; ?></span></p>
             <p>Город: <span><?= $fetch_orders['city']; ?></span></p>
+            <p>Пожелания: <span><?= $fetch_orders['pin']; ?></span></p>
             <p>Способ оплаты: <span><?= $fetch_orders['method']; ?></span></p>
             <p>Продукты: <span><?= $fetch_orders['total_products']; ?></span></p>
             <p>Всего: <span>$<?= $fetch_orders['total_price']; ?></span></p>
-            <p>Пожелания: <span><?= $fetch_orders['comment']; ?></span></p>
             <p>Статус оплаты: <span style="color:<?php if($fetch_orders['payment_status'] == 'pending'){ echo 'red'; }else{ echo 'green'; }; ?>"><?= $fetch_orders['payment_status']; ?></span></p>
             <button class="use-order" onclick="fetchOrderData(<?= $fetch_orders['id']; ?>)">Использовать этот заказ</button>
          </div>

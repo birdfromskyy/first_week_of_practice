@@ -79,10 +79,10 @@ if(isset($_GET['delete'])){
    <meta name="viewport" content="width=device-width, initial-scale=1.0">
    <title>products</title>
 
-   <!-- font awesome cdn link  -->
+   
    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
 
-   <!-- custom css file link  -->
+   
    <link rel="stylesheet" href="css/admin_style.css">
 
 </head>
@@ -100,10 +100,10 @@ if(isset($_GET['delete'])){
          <input type="text" name="name" class="box" required placeholder="Введите название продукта">
          <select name="category" class="box" required>
             <option value="" selected disabled>Выберите категорию</option>
-               <option value="vegitables">Пицца</option>
-               <option value="fruits">Напитки</option>
-               <option value="meat">Бургеры</option>
-               <option value="fish">Закуски</option>
+               <option value="pizza">Пицца</option>
+               <option value="napitki">Напитки</option>
+               <option value="burger">Бургеры</option>
+               <option value="zakuski">Закуски</option>
          </select>
          </div>
          <div class="inputBox">
