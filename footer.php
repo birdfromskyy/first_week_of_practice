@@ -29,6 +29,6 @@
 
    </section>
 
-   <p class="credit"> © <?= date('Y'); ?> by <img src="images/logo2.png" alt="KING-FOOD" width="190" height="30"> | Выбирай только лучшее! </p>
+   <p class="credit"> © <?= date('Y'); ?> by <img src="images/logo2.png" alt="KING-FOOD" width="190" height="30"> | ЗНАЙ, ГДЕ ВКУСНО! </p>
 
 </footer>

@@ -40,10 +40,10 @@ if(isset($_GET['delete'])){
    <meta name="viewport" content="width=device-width, initial-scale=1.0">
    <title>orders</title>
 
-   <!-- font awesome cdn link  -->
+  
    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
 
-   <!-- custom css file link  -->
+   
    <link rel="stylesheet" href="css/admin_style.css">
 
 </head>
@@ -58,7 +58,7 @@ if(isset($_GET['delete'])){
    <div class="box-container">
 
       <?php
-         $select_orders = $conn->prepare("SELECT * FROM `orders` WHERE payment_status = 'completed'");
+         $select_orders = $conn->prepare("SELECT * FROM `orders` WHERE payment_status = 'завершен'");
          $select_orders->execute();
          if($select_orders->rowCount() > 0){
             while($fetch_orders = $select_orders->fetch(PDO::FETCH_ASSOC)){
@@ -71,7 +71,7 @@ if(isset($_GET['delete'])){
          <p> номер : <span><?= $fetch_orders['number']; ?></span> </p>
          <p> продукты : <span><?= $fetch_orders['total_products']; ?></span> </p>
          <p> всего : <span>$<?= $fetch_orders['total_price']; ?>/-</span> </p>
-         <p> пожелания : <span><?= $fetch_orders['comment']; ?></span> </p>
+         <p> пожелания : <span><?= $fetch_orders['pin']; ?></span> </p>
          <p> способ оплаты : <span><?= $fetch_orders['method']; ?></span> </p>
          <form action="" method="POST">
             <input type="hidden" name="order_id" value="<?= $fetch_orders['id']; ?>">

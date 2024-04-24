@@ -29,10 +29,10 @@ if(isset($_GET['delete'])){
    <meta name="viewport" content="width=device-width, initial-scale=1.0">
    <title>users</title>
 
-   <!-- font awesome cdn link  -->
+   
    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
 
-   <!-- custom css file link  -->
+   
    <link rel="stylesheet" href="css/admin_style.css">
 
 </head>
@@ -47,7 +47,7 @@ if(isset($_GET['delete'])){
    <div class="box-container">
 
       <?php
-         $select_users = $conn->prepare("SELECT * FROM `users` WHERE user_type = 'user' OR user_type = 'admin'");
+         $select_users = $conn->prepare("SELECT * FROM `users` WHERE user_type = 'user' OR user_type = 'admin' OR user_type = 'courier' OR user_type = 'kitchen'");
 
          $select_users->execute();
          while($fetch_users = $select_users->fetch(PDO::FETCH_ASSOC)){

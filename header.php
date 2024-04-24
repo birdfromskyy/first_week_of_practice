@@ -30,9 +30,9 @@ if(isset($message)){
       <div class="icons">
          <a id="menu-btn"> <script src="https://cdn.lordicon.com/lordicon.js"></script>
          <lord-icon
-            src="https://cdn.lordicon.com/uvtlaqep.json"
+            src="https://cdn.lordicon.com/pcllgpqm.json"
             trigger="hover"
-            colors="primary:#e88c30"
+            colors="primary:#121331,secondary:#e88c30,tertiary:#e88c30"
             style="width:45px;height:45px">
          </lord-icon>
          <a id="user-btn"> <script src="https://cdn.lordicon.com/lordicon.js"></script>
@@ -84,8 +84,10 @@ if(isset($message)){
          ?>
          <img src="uploaded_img/<?= $fetch_profile['image']; ?>" alt="">
          <p><?= $fetch_profile['name']; ?></p>
-         <a href="user_profile_update.php" class="btn">обновить профиль</a>
-         <a href="logout.php" class="delete-btn">выйти</a>
+         <div class="flex-btn">
+            <a href="user_profile_update.php" class="btn">обновить профиль</a>
+            <a href="logout.php" class="delete-btn">выйти</a>
+         </div>
       </div>
 
    </div>

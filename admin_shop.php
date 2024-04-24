@@ -16,10 +16,10 @@ $user_id = $_SESSION['user_id'];
    <meta name="viewport" content="width=device-width, initial-scale=1.0">
    <title>shop</title>
 
-   <!-- font awesome cdn link  -->
+   
    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
 
-   <!-- custom css file link  -->
+   
    <link rel="stylesheet" href="css/style.css">
 
 </head>
@@ -29,10 +29,10 @@ $user_id = $_SESSION['user_id'];
 
 <section class="p-category">
 
-   <a href="category.php?category=fruits">Пицца</a>
-   <a href="category.php?category=vegitables">Бургеры</a>
-   <a href="category.php?category=fish">Закуски</a>
-   <a href="category.php?category=meat">Напитки</a>
+   <a href="category.php?category=napitki">Пицца</a>
+   <a href="category.php?category=pizza">Бургеры</a>
+   <a href="category.php?category=zakuski">Закуски</a>
+   <a href="category.php?category=burger">Напитки</a>
 
 </section>
 

@@ -21,7 +21,7 @@ function showPastOrders() {
    document.getElementById('pastOrders').style.display = 'block';
  }
  
- // Показать заказы при загрузке страницы
+ 
  document.addEventListener('DOMContentLoaded', function() {
    document.querySelectorAll('.past-order').forEach(item => {
      item.addEventListener('click', function() {
@@ -56,6 +56,7 @@ function showPastOrders() {
    document.querySelector('input[name="flat"]').value = data.flat;
    document.querySelector('input[name="street"]').value = data.street;
    document.querySelector('input[name="city"]').value = data.city;
-   document.querySelector('input[name="pin_code"]').value = data.pin_code;
+   document.querySelector('input[name="pin"]').value = data.pin;
 }
  
+
