@@ -17,7 +17,7 @@ if(isset($_POST['update_order'])){
    $update_payment = filter_var($update_payment, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
    $update_orders = $conn->prepare("UPDATE `orders` SET payment_status = ? WHERE id = ?");
    $update_orders->execute([$update_payment, $order_id]);
-   $message[] = 'payment has been updated!';
+   $message[] = 'Статус был обновлен!';
 
 };
 
@@ -75,7 +75,7 @@ if(isset($_GET['delete'])){
          <p>Способ оплаты: <span><?= $fetch_orders['method']; ?></span></p>
          <p>Продукты: <span><?= $fetch_orders['total_products']; ?></span></p>
          <p>Всего: <span><?= $fetch_orders['total_price']; ?>₽</span></p>
-         <p>Статус оплаты: <span style="color:<?php if($fetch_orders['payment_status'] == 'pending'){ echo 'red'; }else{ echo 'green'; }; ?>"><?= $fetch_orders['payment_status']; ?></span></p>
+         <p>Статус оплаты: <span style="color:<?php if($fetch_orders['payment_status'] == 'рассматривается'){ echo 'red'; }else{ echo 'green'; }; ?>"><?= $fetch_orders['payment_status']; ?></span></p>
       </div>
       <?php
          }

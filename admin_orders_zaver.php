@@ -17,7 +17,7 @@ if(isset($_POST['update_order'])){
    $update_payment = filter_var($update_payment, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
    $update_orders = $conn->prepare("UPDATE `orders` SET payment_status = ? WHERE id = ?");
    $update_orders->execute([$update_payment, $order_id]);
-   $message[] = 'payment has been updated!';
+   $message[] = 'Статус был обновлён!';
 
 };
 
@@ -40,7 +40,7 @@ if(isset($_GET['delete'])){
    <meta name="viewport" content="width=device-width, initial-scale=1.0">
    <title>orders</title>
 
-  
+
    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
 
    
@@ -87,7 +87,7 @@ if(isset($_GET['delete'])){
             </select>
             <div class="flex-btn">
                <input type="submit" name="update_order" class="option-btn" value="обновить">
-               <a href="admin_orders.php?delete=<?= $fetch_orders['id']; ?>" class="delete-btn" onclick="return confirm('delete this order?');">удалить</a>
+               <a href="admin_orders.php?delete=<?= $fetch_orders['id']; ?>" class="delete-btn" onclick="return confirm('Удалить этот заказ?');">удалить</a>
             </div>
          </form>
       </div>

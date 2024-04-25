@@ -18,7 +18,7 @@ if(isset($_POST['update_order'])){
    $update_payment = filter_var($update_payment, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
    $update_orders = $conn->prepare("UPDATE `orders` SET payment_status = ? WHERE id = ?");
    $update_orders->execute([$update_payment, $order_id]);
-   $message[] = 'payment has been updated!';
+   $message[] = 'Статус был изменен!';
 
 };
 
@@ -59,8 +59,8 @@ if(isset($_GET['delete'])){
    <div class="box-container">
 
       <?php
-        $select_orders = $conn->prepare("SELECT * FROM orders WHERE payment_status = 'завершен' AND courier_email = ?");
-        $select_orders->execute([$courier_email]);
+         $select_orders = $conn->prepare("SELECT * FROM orders WHERE payment_status = 'завершен' AND courier_email = ?");
+         $select_orders->execute([$courier_email]);
          if($select_orders->rowCount() > 0){
             while($fetch_orders = $select_orders->fetch(PDO::FETCH_ASSOC)){
       ?>

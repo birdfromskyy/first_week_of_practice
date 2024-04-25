@@ -21,12 +21,12 @@ if(!isset($courier_id)){
 };
 
 if(isset($_POST['finish'])){
-    $update_orders = $conn->prepare("UPDATE `orders` SET payment_status = ? WHERE id = ?");
-    $update_orders->execute([$order_status,$_POST['order_id']]);
+   $update_orders = $conn->prepare("UPDATE `orders` SET payment_status = ? WHERE id = ?");
+   $update_orders->execute([$order_status,$_POST['order_id']]);
 
-    $update_balance = $conn->prepare("UPDATE `users` SET balance = ? WHERE id = ?");
-    $update_balance->execute([$new_balance, $courier_id]);
-    $message[] = 'Заказ завершен';
+   $update_balance = $conn->prepare("UPDATE `users` SET balance = ? WHERE id = ?");
+   $update_balance->execute([$new_balance, $courier_id]);
+   $message[] = 'Заказ завершен';
 };
 
 if(isset($_GET['delete'])){

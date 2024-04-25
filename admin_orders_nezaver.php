@@ -63,7 +63,7 @@ $select_orders->execute();
             while($fetch_orders = $select_orders->fetch(PDO::FETCH_ASSOC)){
       ?>
       <div class="box">
-         <p> user id : <span><?= $fetch_orders['user_id']; ?></span> </p>
+         <p>user id : <span><?= $fetch_orders['user_id']; ?></span> </p>
          <p>Дата: <span><?= $fetch_orders['placed_on']; ?></span></p>
          <p>Имя: <span><?= $fetch_orders['name']; ?></span></p>
          <p>Номер: <span><?= $fetch_orders['number']; ?></span></p>
@@ -88,7 +88,7 @@ $select_orders->execute();
             </select>
             <div class="flex-btn">
                <input type="submit" name="update_order" class="option-btn" value="обновить">
-               <a href="admin_orders.php?delete=<?= $fetch_orders['id']; ?>" class="delete-btn" onclick="return confirm('delete this order?');">удалить</a>
+               <a href="admin_orders.php?delete=<?= $fetch_orders['id']; ?>" class="delete-btn" onclick="return confirm('Удалить этот заказ?');">удалить</a>
             </div>
          </form>
       </div>

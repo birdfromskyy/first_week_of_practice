@@ -13,9 +13,9 @@ if(!isset($courier_id)){
 };
 
 if(isset($_POST['accept'])){
-    $update_orders = $conn->prepare("UPDATE `orders` SET courier_name = ?, courier_email = ?, payment_status = ? WHERE id = ?");
-    $update_orders->execute([$courier_name, $courier_email, $order_status, $_POST['order_id']]);
-    $message[] = 'Курьер принял заказ!';
+   $update_orders = $conn->prepare("UPDATE `orders` SET courier_name = ?, courier_email = ?, payment_status = ? WHERE id = ?");
+   $update_orders->execute([$courier_name, $courier_email, $order_status, $_POST['order_id']]);
+   $message[] = 'Курьер принял заказ!';
 };
 
 if(isset($_GET['delete'])){
