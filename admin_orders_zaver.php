@@ -70,7 +70,7 @@ if(isset($_GET['delete'])){
          <p> email : <span><?= $fetch_orders['email']; ?></span> </p>
          <p> номер : <span><?= $fetch_orders['number']; ?></span> </p>
          <p> продукты : <span><?= $fetch_orders['total_products']; ?></span> </p>
-         <p> всего : <span>$<?= $fetch_orders['total_price']; ?>/-</span> </p>
+         <p> всего : <span><?= $fetch_orders['total_price']; ?>₽</span> </p>
          <p> пожелания : <span><?= $fetch_orders['pin']; ?></span> </p>
          <p> способ оплаты : <span><?= $fetch_orders['method']; ?></span> </p>
          <form action="" method="POST">

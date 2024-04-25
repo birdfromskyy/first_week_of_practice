@@ -38,14 +38,14 @@ if(!isset($user_id)){
       <div class="box">
          <img src="images/about11.png" alt="" width="450" height="20">
          <h3>Почему именно мы?</h3>
-         <p> У нас только оригинальные продукты, подобранные с заботой о вашем вкусе.</p>
+         <p style="color: black;">У нас только оригинальные продукты, подобранные с заботой о вашем вкусе.</p>
          <a href="contact.php" class="btn1">Контакты</a>
       </div>
 
       <div class="box">
          <img src="images/about12.png" alt="" width="450" height="200">
          <h3>Как сделать покупку?</h3>
-         <p>Сделать покупку у нас очень просто. Нажми кнопку ниже и всё готово</p>
+         <p style="color: black;">У нас только оригинальные продукты, подобранные с заботой о вашем вкусе.</p>
          <a href="shop.php" class="btn1">Покупки</a>
       </div>
 

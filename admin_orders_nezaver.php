@@ -29,6 +29,9 @@ if(isset($_GET['delete'])){
    header('location:admin_orders.php');
 
 }
+$select_orders = $conn->prepare("SELECT * FROM `orders` WHERE payment_status != 'завершен'");
+$select_orders->execute();
+
 
 ?>
 
@@ -56,8 +59,6 @@ if(isset($_GET['delete'])){
    <div class="box-container">
 
       <?php
-         $select_orders = $conn->prepare("SELECT * FROM `orders` WHERE payment_status = 'pending' OR payment_status = 'рассматривается' OR payment_status = 'заказ передан кухне' OR payment_status = 'заказ готовится' OR payment_status = 'ожидаем курьера' OR payment_status = 'курьер забрал заказ' OR payment_status = 'курьер в пути' OR payment_status = 'завершен'");
-         $select_orders->execute();
          if($select_orders->rowCount() > 0){
             while($fetch_orders = $select_orders->fetch(PDO::FETCH_ASSOC)){
       ?>

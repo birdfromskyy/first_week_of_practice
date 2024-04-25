@@ -4,9 +4,9 @@
 
 session_start();
 
-$user_id = $_SESSION['user_id'];
+$kitchen_id = $_SESSION['kitchen_id'];
 
-if(!isset($user_id)){
+if(!isset($kitchen_id)){
    header('location:login.php');
 };
 
@@ -21,15 +21,15 @@ if(isset($_POST['send'])){
    $msg = $_POST['msg'];
    $msg = filter_var($msg, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
 
-   $select_message = $conn->prepare("SELECT * FROM `message` WHERE name = ? AND email = ? AND number = ? AND message = ?");
+   $select_message = $conn->prepare("SELECT * FROM `message_kitchen` WHERE name = ? AND email = ? AND number = ? AND message = ?");
    $select_message->execute([$name, $email, $number, $msg]);
 
    if($select_message->rowCount() > 0){
       $message[] = 'Уже отправленное сообщение!';
    }else{
 
-      $insert_message = $conn->prepare("INSERT INTO `message`(user_id, name, email, number, message) VALUES(?,?,?,?,?)");
-      $insert_message->execute([$user_id, $name, $email, $number, $msg]);
+      $insert_message = $conn->prepare("INSERT INTO `message_kitchen`(kitchen_id, name, email, number, message) VALUES(?,?,?,?,?)");
+      $insert_message->execute([$kitchen_id, $name, $email, $number, $msg]);
 
       $message[] = 'Сообщение отправлено!';
 
@@ -56,7 +56,7 @@ if(isset($_POST['send'])){
 </head>
 <body>
    
-<?php include 'header.php'; ?>
+<?php include 'kitchen_header.php'; ?>
 
 <section class="contact">
 

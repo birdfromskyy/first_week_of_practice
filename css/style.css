@@ -157,9 +157,6 @@
    position: relative;
 }
 
-
-
-
 /* Стилизация ценника */
 .products .box-container .box .price {
    position: absolute;
@@ -330,8 +327,6 @@
    }
 }
 
-
-
 .quick-view .box .qty{
    margin:.5rem 0;
    border-radius: .5rem;
@@ -354,7 +349,6 @@
    font-size: 1.5rem;
    color:var(--light-color);
 }
-
 
 /* shop.php */
 .p-category {
@@ -406,9 +400,6 @@
    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
 }
 
-
-
-
 /*about*/
 .about .row{
    display: flex;
@@ -446,10 +437,6 @@
    display: inline-block;
    width: auto;
 }
-
-
-
-
 
 /*reviews*/
 .reviews .box-container{
@@ -538,8 +525,6 @@
 }
 
 
-
-
 /*search*/
 .search-form form{
    display: flex;
@@ -564,9 +549,6 @@
    width: auto;
    margin-top: 0;
 }
-
-
-
 
 
 /*wishlist*/
@@ -677,11 +659,6 @@
    color:var(--red);
 }
 
-
-
-
-
-
 /*shopping-cart*/
 .shopping-cart .box-container{
    display: grid;
@@ -694,10 +671,12 @@
 .shopping-cart .box-container .box{
    padding:2rem;
    text-align: center;
+   width: 350px; 
+   height: 550px;
    border:var(--border);
    background-color: var(--white);
    box-shadow: var(--box-shadow);
-   border-radius: .5rem;
+   border-radius: 2rem;
    position: relative;
 }
 
@@ -800,10 +779,6 @@
    color:var(--red);
 }
 
-
-
-
-
 /*display-orders*/
 .display-orders{
    text-align: center;
@@ -835,10 +810,6 @@
 .display-orders .grand-total span{
    color:var(--red);
 }
-
-
-
-
 
 /*checkout-orders*/
 .checkout-orders form{
@@ -887,10 +858,6 @@
    color:var(--light-color);
 }
 
-
-
-
-
 /*placed-orders*/
 .placed-orders .box-container {
    display: flex;
@@ -924,16 +891,6 @@
 .placed-orders .box-container .box p span {
    color: var(--orange);
 }
-
-
-
-
-
-
-
-
-
-
 
 @media (max-width:768px){
 

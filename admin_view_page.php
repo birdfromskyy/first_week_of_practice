@@ -4,9 +4,9 @@
 
 session_start();
 
-$user_id = $_SESSION['user_id'];
+$admin_id = $_SESSION['admin_id'];
 
-if(!isset($user_id)){
+if(!isset($admin_id)){
    header('location:login.php');
 };
 
@@ -93,12 +93,12 @@ if(isset($_POST['add_to_cart'])){
 </head>
 <body>
    
-<?php include 'header.php'; ?>
+<?php include 'admin_header.php'; ?>
 
 <section class="quick-view">
 
 
-   <a href="shop.php" class="btn1">продолжить покупку</a>
+   <a href="admin_shop.php" class="btn1">продолжить покупку</a>
    <?php
       $pid = $_GET['pid'];
       $select_products = $conn->prepare("SELECT * FROM `products` WHERE id = ?");

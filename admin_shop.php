@@ -5,7 +5,7 @@
 session_start();
 error_reporting(E_ERROR | E_PARSE);
 
-$user_id = $_SESSION['user_id'];
+$admin_id = $_SESSION['admin_id'];
 ?>
 
 <!DOCTYPE html>
@@ -25,14 +25,14 @@ $user_id = $_SESSION['user_id'];
 </head>
 <body>
    
-<?php include 'header.php'; ?>
+<?php include 'admin_header.php'; ?>
 
 <section class="p-category">
 
-   <a href="category.php?category=napitki">Пицца</a>
-   <a href="category.php?category=pizza">Бургеры</a>
-   <a href="category.php?category=zakuski">Закуски</a>
-   <a href="category.php?category=burger">Напитки</a>
+   <a href="admin_category.php?category=napitki">Пицца</a>
+   <a href="admin_category.php?category=pizza">Бургеры</a>
+   <a href="admin_category.php?category=zakuski">Закуски</a>
+   <a href="admin_category.php?category=burger">Напитки</a>
 
 </section>
 
@@ -52,7 +52,7 @@ $user_id = $_SESSION['user_id'];
    ?>
    <form action="" class="box" method="POST">
       <div class="price">$<span><?= $fetch_products['price']; ?></span>/-</div>
-      <a href="view_page.php?pid=<?= $fetch_products['id']; ?>" class="fas fa-eye"></a>
+      <a href="admin_view_page.php?pid=<?= $fetch_products['id']; ?>" class="fas fa-eye"></a>
       <img src="uploaded_img/<?= $fetch_products['image']; ?>" alt="">
     
       <input type="hidden" name="pid" value="<?= $fetch_products['id']; ?>">

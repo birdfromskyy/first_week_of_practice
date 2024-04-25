@@ -14,7 +14,7 @@ if(!isset($kitchen_id)){
 if(isset($_POST['transfer'])){
     $update_orders = $conn->prepare("UPDATE `orders` SET payment_status = ? WHERE id = ?");
     $update_orders->execute([$order_status, $_POST['order_id']]);
-    $message[] = 'Подтвердить передачу заказа курьеру';
+    $message[] = 'Вы подтвердили передачу заказа курьеру';
 };
 
 if(isset($_GET['delete'])){

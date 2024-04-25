@@ -18,11 +18,20 @@ if(isset($message)){
    <div class="flex">
 
       <img src="images/logo2.png" alt="KING-FOOD" width="190" height="40" >
-
+      <div class="icons">
+         <a id="cur-btn"> <script src="https://cdn.lordicon.com/lordicon.js"></script>
+         <lord-icon
+            src="https://cdn.lordicon.com/yeoppmgu.json"
+            trigger="hover"
+            stroke="bold"
+            style="width:80px;height:80px">
+         </lord-icon>
+      </div>
       <nav class="navbar">
-         <a href="kitchen_home.php">ГЛАВНАЯ</a>
+         <a href="kitchen_home.php">МОЯ СТРАНИЦА</a>
          <a href="kitchen_orders_nezaver.php">ЗАКАЗЫ</a>
-         <a href="kitchen_to_courier.php">ПОДТВЕРДИТЬ ЗАКАЗЫ</a>
+         <a href="kitchen_to_courier.php">ПОДТВЕРДИТЬ ЗАКАЗ</a>
+         <a href="kitchen_contact.php">ПОДДЕРЖКА</a>
       </nav>
 
       <div class="icons">
@@ -35,12 +44,11 @@ if(isset($message)){
          </lord-icon>
          <a id="user-btn"> <script src="https://cdn.lordicon.com/lordicon.js"></script>
          <lord-icon
-            src="https://cdn.lordicon.com/xcxzayqr.json"
+            src="https://cdn.lordicon.com/pyarizrk.json"
             trigger="hover"
-            state="hover-looking-around"
-            colors="primary:#e83a30,secondary:#e88c30"
-            style="width:45px;height:45px">
-         </lord-icon></a>
+            colors="primary:#121331,secondary:#f4c89c,tertiary:#e88c30,quaternary:#242424"
+            style="width:80px;height:80px">
+         </lord-icon>
          
          <?php
             $count_cart_items = $conn->prepare("SELECT * FROM `cart` WHERE user_id = ?");
@@ -59,7 +67,7 @@ if(isset($message)){
          ?>
          <img src="uploaded_img/<?= $fetch_profile['image']; ?>" alt="">
          <p><?= $fetch_profile['name']; ?></p>
-         <a href="user_profile_update.php" class="btn">обновить профиль</a>
+         <a href="kitchen_profile_update.php" class="btn">обновить профиль</a>
          <a href="logout.php" class="delete-btn">выйти</a>
       </div>
 
