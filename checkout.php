@@ -58,7 +58,7 @@ if(isset($_POST['order'])){
       $insert_order->execute([$user_id, $name, $number, $email, $method, $flat, $street, $city, $pin, $total_products, $cart_total, $placed_on]);
       $delete_cart = $conn->prepare("DELETE FROM `cart` WHERE user_id = ?");
       $delete_cart->execute([$user_id]);
-      $message[] = 'order placed successfully!';
+      $message[] = 'Заказ сделан!';
    }
 
 }
@@ -109,7 +109,7 @@ $order_pin = isset($_SESSION['order_pin']) ? $_SESSION['order_pin'] : '';
    <?php
     }
    }else{
-      echo '<p class="empty">your cart is empty!</p>';
+      echo '<p class="empty">Ваша корзина пустая!</p>';
    }
    ?>
    <div class="grand-total">Общая стоимость : <span><?= $cart_grand_total; ?>₽</span></div>
