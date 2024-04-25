@@ -74,7 +74,7 @@ if(isset($_GET['delete'])){
          <p>Пожелания: <span><?= $fetch_orders['pin']; ?></span></p>
          <p>Способ оплаты: <span><?= $fetch_orders['method']; ?></span></p>
          <p>Продукты: <span><?= $fetch_orders['total_products']; ?></span></p>
-         <p>Всего: <span>$<?= $fetch_orders['total_price']; ?></span></p>
+         <p>Всего: <span><?= $fetch_orders['total_price']; ?>₽</span></p>
          <p>Статус оплаты: <span style="color:<?php if($fetch_orders['payment_status'] == 'pending'){ echo 'red'; }else{ echo 'green'; }; ?>"><?= $fetch_orders['payment_status']; ?></span></p>
       </div>
       <?php

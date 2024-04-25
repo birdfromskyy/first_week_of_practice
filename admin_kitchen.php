@@ -15,7 +15,7 @@ if(isset($_GET['delete'])){
    $delete_id = $_GET['delete'];
    $delete_users = $conn->prepare("DELETE FROM `users` WHERE id = ?");
    $delete_users->execute([$delete_id]);
-   header('location:admin_users.php');
+   header('location:admin_kitchen.php');
 
 }
 
@@ -47,7 +47,7 @@ if(isset($_GET['delete'])){
    <div class="box-container">
 
       <?php
-         $select_users = $conn->prepare("SELECT * FROM `users` WHERE  user_type = 'admin'");
+         $select_users = $conn->prepare("SELECT * FROM `users` WHERE  user_type = 'kitchen'");
 
          $select_users->execute();
          while($fetch_users = $select_users->fetch(PDO::FETCH_ASSOC)){
@@ -57,8 +57,8 @@ if(isset($_GET['delete'])){
          <p> user id : <span><?= $fetch_users['id']; ?></span></p>
          <p> имя : <span><?= $fetch_users['name']; ?></span></p>
          <p> email : <span><?= $fetch_users['email']; ?></span></p>
-         <p> пользователь : <span style=" color:<?php if($fetch_users['user_type'] == 'admin'){ echo 'orange'; }; ?>"><?= $fetch_users['user_type']; ?></span></p>
-         <a href="admin_users.php?delete=<?= $fetch_users['id']; ?>" onclick="return confirm('delete this user?');" class="delete-btn">удалить</a>
+         <p> пользователь : <span style=" color:<?php if($fetch_users['user_type'] == 'kitchen'){ echo 'blue'; }; ?>"><?= $fetch_users['user_type']; ?></span></p>
+         <a href="admin_kitchen.php?delete=<?= $fetch_users['id']; ?>" onclick="return confirm('delete this user?');" class="delete-btn">удалить</a>
       </div>
       <?php
       }

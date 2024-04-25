@@ -39,12 +39,12 @@ if(!isset($admin_id)){
       <?php
          $total_pendings = 0;
          $select_pendings = $conn->prepare("SELECT * FROM `orders` WHERE payment_status = ?");
-         $select_pendings->execute(['pending']);
+         $select_pendings->execute(['рассматривается']);
          while($fetch_pendings = $select_pendings->fetch(PDO::FETCH_ASSOC)){
             $total_pendings += $fetch_pendings['total_price'];
          };
       ?>
-      <h3>$<?= $total_pendings; ?>/-</h3>
+      <h3><?= $total_pendings; ?>₽</h3>
       <p>Незавершённые Заказы </p>
       <a href="admin_orders_nezaver.php" class="btn">Посмотреть</a>
       </div>
@@ -53,12 +53,12 @@ if(!isset($admin_id)){
       <?php
          $total_completed = 0;
          $select_completed = $conn->prepare("SELECT * FROM `orders` WHERE payment_status = ?");
-         $select_completed->execute(['completed']);
+         $select_completed->execute(['завершен']);
          while($fetch_completed = $select_completed->fetch(PDO::FETCH_ASSOC)){
             $total_completed += $fetch_completed['total_price'];
          };
       ?>
-      <h3>$<?= $total_completed; ?>/-</h3>
+      <h3><?= $total_completed; ?>₽</h3>
       <p>Завершённые Заказы</p>
       <a href="admin_orders_zaver.php" class="btn">Посмотреть</a>
       </div>
@@ -70,7 +70,7 @@ if(!isset($admin_id)){
          $number_of_orders = $select_orders->rowCount();
       ?>
       <h3><?= $number_of_orders; ?></h3>
-      <p>Количество Заказов</p>
+      <p>Статус Заказов</p>
       <a href="admin_orders.php" class="btn">Посмотреть</a>
       </div>
 
@@ -92,7 +92,7 @@ if(!isset($admin_id)){
          $number_of_users = $select_users->rowCount();
       ?>
       <h3><?= $number_of_users; ?></h3>
-      <p>Пользователей</p>
+      <p>Пользователи</p>
       <a href="admin_users_only.php" class="btn">Посмотреть</a>
       </div>
 
@@ -103,9 +103,39 @@ if(!isset($admin_id)){
          $number_of_admins = $select_admins->rowCount();
       ?>
       <h3><?= $number_of_admins; ?></h3>
-      <p>Количество Админов</p>
+      <p>Администраторы</p>
       <a href="admin_users_admin.php" class="btn">Посмотреть</a>
       </div>
+
+
+
+
+
+      <div class="box">
+      <?php
+         $select_admins = $conn->prepare("SELECT * FROM `users` WHERE user_type = ?");
+         $select_admins->execute(['courier']);
+         $number_of_admins = $select_admins->rowCount();
+      ?>
+      <h3><?= $number_of_admins; ?></h3>
+      <p>Курьеры</p>
+      <a href="admin_courier.php" class="btn">Посмотреть</a>
+      </div>
+
+
+
+      <div class="box">
+      <?php
+         $select_admins = $conn->prepare("SELECT * FROM `users` WHERE user_type = ?");
+         $select_admins->execute(['kitchen']);
+         $number_of_admins = $select_admins->rowCount();
+      ?>
+      <h3><?= $number_of_admins; ?></h3>
+      <p>Кухня</p>
+      <a href="admin_kitchen.php" class="btn">Посмотреть</a>
+      </div>
+
+
 
       <div class="box">
       <?php
@@ -114,7 +144,7 @@ if(!isset($admin_id)){
          $number_of_accounts = $select_accounts->rowCount();
       ?>
       <h3><?= $number_of_accounts; ?></h3>
-      <p>Количество Аккаунтов</p>
+      <p>Все аккаунты</p>
       <a href="admin_users.php" class="btn">Посмотреть</a>
       </div>
 
@@ -125,8 +155,30 @@ if(!isset($admin_id)){
          $number_of_messages = $select_messages->rowCount();
       ?>
       <h3><?= $number_of_messages; ?></h3>
-      <p>Количество Сообщений</p>
+      <p>Сообщения Пользователей</p>
       <a href="admin_contacts.php" class="btn">Посмотреть</a>
+      </div>
+
+      <div class="box">
+      <?php
+         $select_messages = $conn->prepare("SELECT * FROM `message_courier`");
+         $select_messages->execute();
+         $number_of_messages = $select_messages->rowCount();
+      ?>
+      <h3><?= $number_of_messages; ?></h3>
+      <p>Сообщения Курьеров</p>
+      <a href="admin_contacts_courier.php" class="btn">Посмотреть</a>
+      </div>
+
+      <div class="box">
+      <?php
+         $select_messages = $conn->prepare("SELECT * FROM `message_kitchen`");
+         $select_messages->execute();
+         $number_of_messages = $select_messages->rowCount();
+      ?>
+      <h3><?= $number_of_messages; ?></h3>
+      <p>Сообщения Кухни</p>
+      <a href="admin_contacts_kitchen.php" class="btn">Посмотреть</a>
       </div>
 
    </div>

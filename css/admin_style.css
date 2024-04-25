@@ -36,8 +36,6 @@
    margin: 0; 
 }
 
-
-
 .add-products form {
    max-width: 70rem;
    padding: 2rem;
@@ -108,7 +106,6 @@
    position: relative;
 }
 
-
 .show-products .box-container .box .price {
    position: absolute;
    top: 1rem; 
@@ -123,8 +120,6 @@
    transform: translateY(-5px) scale(1.05); 
    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.7); 
 }
-
-
 
 .show-products .box-container .box .price::after {
    content: '';
@@ -171,11 +166,6 @@
    line-height: 1.5;
    color: var(--light-color);
 }
-
-
-
-
-
 
 .update-product form{
    max-width: 45rem;
@@ -308,16 +298,6 @@
 }
 
 
-
-
-
-
-
-
-
-
-
-
 @media (max-width:768px){
 
    .add-products form .flex .inputBox{
@@ -325,7 +305,6 @@
    }
 
 }
-
 
 
 @media (max-width:450px){

@@ -8,14 +8,16 @@ $admin_id = $_SESSION['admin_id'];
 
 if (!isset($admin_id)) {
     header('location:login.php');
+    
 }
 
 if (isset($_GET['delete'])) {
 
     $delete_id = $_GET['delete'];
-    $delete_message = $conn->prepare("DELETE FROM `message` WHERE id = ?");
+    $delete_message = $conn->prepare("DELETE FROM `message_courier` WHERE id = ?");
     $delete_message->execute([$delete_id]);
-    header('location:admin_contacts.php');
+    header('location:admin_contacts_courier.php');
+    
 }
 
 ?>
@@ -46,16 +48,16 @@ if (isset($_GET['delete'])) {
         <div class="box-container">
 
             <?php
-            $select_message = $conn->prepare("SELECT * FROM `message`");
+            $select_message = $conn->prepare("SELECT * FROM `message_courier`");
             $select_message->execute();
             if ($select_message->rowCount() > 0) {
                 while ($fetch_message = $select_message->fetch(PDO::FETCH_ASSOC)) {
                     $select_user = $conn->prepare("SELECT * FROM `users` WHERE id = ?");
-                    $select_user->execute([$fetch_message['user_id']]);
+                    $select_user->execute([$fetch_message['courier_id']]);
                     $fetch_user = $select_user->fetch(PDO::FETCH_ASSOC);
             ?>
                     <div class="box">
-                        <p> user id : <span><?= $fetch_message['user_id']; ?></span> </p>
+                        <p> user id : <span><?= $fetch_message['courier_id']; ?></span> </p>
                         <p> name : <span><?= $fetch_message['name']; ?></span> </p>
                         <p> number : <span><?= $fetch_message['number']; ?></span> </p>
                         <p> email : <span><?= $fetch_message['email']; ?></span> </p>
@@ -65,7 +67,7 @@ if (isset($_GET['delete'])) {
                         <?php else : ?>
                             <p> пользователь : <span>Не найден</span></p>
                         <?php endif; ?>
-                        <a href="admin_contacts.php?delete=<?= $fetch_message['id']; ?>" onclick="return confirm('delete this message?');" class="delete-btn">Удалить</a>
+                        <a href="admin_contacts_courier.php?delete=<?= $fetch_message['id']; ?>" onclick="return confirm('delete this message?');" class="delete-btn">Удалить</a>
                     </div>
             <?php
                 }

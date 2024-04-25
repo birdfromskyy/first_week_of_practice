@@ -105,14 +105,14 @@ $order_pin = isset($_SESSION['order_pin']) ? $_SESSION['order_pin'] : '';
             $cart_total_price = ($fetch_cart_items['price'] * $fetch_cart_items['quantity']);
             $cart_grand_total += $cart_total_price;
    ?>
-   <p> <?= $fetch_cart_items['name']; ?> <span>(<?= '$'.$fetch_cart_items['price'].'/- x '. $fetch_cart_items['quantity']; ?>)</span> </p>
+   <p> <?= $fetch_cart_items['name']; ?> <span>(<?= $fetch_cart_items['price'].'₽ x '. $fetch_cart_items['quantity']; ?>)</span> </p>
    <?php
     }
    }else{
       echo '<p class="empty">your cart is empty!</p>';
    }
    ?>
-   <div class="grand-total">Общая стоимость : <span>$<?= $cart_grand_total; ?></span></div>
+   <div class="grand-total">Общая стоимость : <span><?= $cart_grand_total; ?>₽</span></div>
 </section>
 
 <section class="checkout-orders">
@@ -183,7 +183,7 @@ $order_pin = isset($_SESSION['order_pin']) ? $_SESSION['order_pin'] : '';
             <p>Пожелания: <span><?= $fetch_orders['pin']; ?></span></p>
             <p>Способ оплаты: <span><?= $fetch_orders['method']; ?></span></p>
             <p>Продукты: <span><?= $fetch_orders['total_products']; ?></span></p>
-            <p>Всего: <span>$<?= $fetch_orders['total_price']; ?></span></p>
+            <p>Всего: <span><?= $fetch_orders['total_price']; ?>₽</span></p>
             <p>Статус оплаты: <span style="color:<?php if($fetch_orders['payment_status'] == 'pending'){ echo 'red'; }else{ echo 'green'; }; ?>"><?= $fetch_orders['payment_status']; ?></span></p>
             <button class="use-order" onclick="fetchOrderData(<?= $fetch_orders['id']; ?>)">Использовать этот заказ</button>
          </div>

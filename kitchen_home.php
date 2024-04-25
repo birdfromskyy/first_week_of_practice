@@ -28,13 +28,13 @@ if(isset($_POST['add_to_wishlist'])){
    $check_cart_numbers->execute([$p_name, $user_id]);
 
    if($check_wishlist_numbers->rowCount() > 0){
-      $message[] = 'already added to wishlist!';
+      $message[] = 'Уже добавлено в Избранные!';
    }elseif($check_cart_numbers->rowCount() > 0){
-      $message[] = 'already added to cart!';
+      $message[] = 'Уже добавлено в Корзину!';
    }else{
       $insert_wishlist = $conn->prepare("INSERT INTO `wishlist`(user_id, pid, name, price, image) VALUES(?,?,?,?,?)");
       $insert_wishlist->execute([$user_id, $pid, $p_name, $p_price, $p_image]);
-      $message[] = 'added to wishlist!';
+      $message[] = 'Добавлено в Избранные!';
    }
 
 }
@@ -56,7 +56,7 @@ if(isset($_POST['add_to_cart'])){
    $check_cart_numbers->execute([$p_name, $user_id]);
 
    if($check_cart_numbers->rowCount() > 0){
-      $message[] = 'already added to cart!';
+      $message[] = 'Уже добавлено в Корзину!';
    }else{
 
       $check_wishlist_numbers = $conn->prepare("SELECT * FROM `wishlist` WHERE name = ? AND user_id = ?");
@@ -100,17 +100,22 @@ if(isset($_POST['add_to_cart'])){
    <section class="home">
 
       <div class="content">
-         <span>Только вкусная еда! </span>
-         <h3>Откройте для себя волшебство в каждом блюде с KING-FOOD</h3>
-         <p>KING-FOOD - это не просто место, где вы можете насладиться вкусной едой, это место, где каждый прием пищи становится незабываемым событием. Наши бургеры, пиццы, суши и напитки приготовлены с любовью и заботой, чтобы удовлетворить ваши гастрономические желания. Мы гордимся тем, что предлагаем только самые свежие и качественные ингредиенты, чтобы каждый укус приносил вам удовольствие. Присоединяйтесь к нам и окунитесь в мир вкуса и удовольствия с KING-FOOD!</p>
-         <a href="about.php" class="btn">О нас</a>
+
+         <span>НАШ ЛУЧШИЙ ПОВАР: <?= $fetch_profile['name']; ?> <img src="uploaded_img/<?= $fetch_profile['image']; ?>" alt="" width="50" height="50" style="border-radius: 50%;"></span>
+         <h3>СПАСИБО, ЧТО ТЫ В НАШЕЙ БОЛЬШОЙ КОМАНДЕ</h3>
+         <p>Каждый из вас, наши уважаемые шеф-повары, является неотъемлемой частью нашей команды и ключевым элементом в достижении наших целей. Ваш профессионализм, творческий подход к кулинарному искусству и стремление к совершенству делают нашу компанию лучше.
+
+Мы видим ваше усердие и преданность, и хотим выразить вам нашу глубокую благодарность. Ваши кулинарные шедевры не только удовлетворяют вкусовые предпочтения наших клиентов, но и создают неповторимый опыт обслуживания. Пусть ваше творчество и талант всегда будут оценены, а вы сами – вдохновлены успехами, которые достигаете каждый день.
+
+Спасибо вам за ваш вклад и за ваше стремление сделать нашу компанию еще успешнее и лучше для всех!</p>
+         
       </div>
 
    </section>
 
 </div>
 
-<?php include 'courier_footer.php'; ?>
+<?php include 'kitchen_footer.php'; ?>
 
 <script src="js/script.js"></script>
 
