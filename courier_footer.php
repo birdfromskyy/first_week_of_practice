@@ -4,7 +4,7 @@
 
       <div class="box">
          <h3>Переходы</h3>
-         <a href="home.php"> <i class="fas fa-angle-right"></i> Главная</a>
+         <a href="courier_home.php"> <i class="fas fa-angle-right"></i> Главная</a>
       </div>
 
       <div class="box">
