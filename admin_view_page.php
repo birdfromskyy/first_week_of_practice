@@ -69,7 +69,7 @@ if(isset($_POST['add_to_cart'])){
 
       $insert_cart = $conn->prepare("INSERT INTO `cart`(user_id, pid, name, price, quantity, image) VALUES(?,?,?,?,?,?)");
       $insert_cart->execute([$user_id, $pid, $p_name, $p_price, $p_qty, $p_image]);
-      $message[] = 'added to cart!';
+      $message[] = 'Добавлено в корзину!';
    }
 
 }
@@ -122,7 +122,7 @@ if(isset($_POST['add_to_cart'])){
    <?php
          }
       }else{
-         echo '<p class="empty">no products added yet!</p>';
+         echo '<p class="empty">Продукты ещё не добавлены!</p>';
       }
    ?>
 

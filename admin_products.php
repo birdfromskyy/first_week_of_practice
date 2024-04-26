@@ -138,7 +138,7 @@ if(isset($_GET['delete'])){
       <div class="details"><?= $fetch_products['details']; ?></div>
       <div class="flex-btn">
          <a href="admin_update_product.php?update=<?= $fetch_products['id']; ?>" class="option-btn">Обновить</a>
-         <a href="admin_products.php?delete=<?= $fetch_products['id']; ?>" class="delete-btn" onclick="return confirm('delete this product?');">Удалить</a>
+         <a href="admin_products.php?delete=<?= $fetch_products['id']; ?>" class="delete-btn" onclick="return confirm('Удалить этот продукт?');">Удалить</a>
       </div>
    </div>
    <?php

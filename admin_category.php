@@ -70,7 +70,7 @@ if(isset($_POST['add_to_cart'])){
 
       $insert_cart = $conn->prepare("INSERT INTO `cart`(user_id, pid, name, price, quantity, image) VALUES(?,?,?,?,?,?)");
       $insert_cart->execute([$user_id, $pid, $p_name, $p_price, $p_qty, $p_image]);
-      $message[] = 'added to cart!';
+      $message[] = 'Добавлено в корзину!';
    }
 
 }
@@ -105,8 +105,8 @@ if(isset($_POST['add_to_cart'])){
 </section>
 
 <section class="products">
-    <div style="text-align: center;">
-        <a href="admin_products.php" class="btn">Вернуться обратно</a>
+   <div style="text-align: center;">
+      <a href="admin_products.php" class="btn">Вернуться обратно</a>
 
 
    <div class="box-container">
@@ -134,7 +134,7 @@ if(isset($_POST['add_to_cart'])){
    <?php
          }
       }else{
-         echo '<p class="empty">no products available!</p>';
+         echo '<p class="empty">Нет доступных продуктов</p>';
       }
    ?>
 

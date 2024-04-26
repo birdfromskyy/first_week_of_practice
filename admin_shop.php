@@ -54,7 +54,7 @@ $admin_id = $_SESSION['admin_id'];
       <div class="price">$<span><?= $fetch_products['price']; ?></span>/-</div>
       <a href="admin_view_page.php?pid=<?= $fetch_products['id']; ?>" class="fas fa-eye"></a>
       <img src="uploaded_img/<?= $fetch_products['image']; ?>" alt="">
-    
+   
       <input type="hidden" name="pid" value="<?= $fetch_products['id']; ?>">
       <input type="hidden" name="p_name" value="<?= $fetch_products['name']; ?>">
       <input type="hidden" name="p_price" value="<?= $fetch_products['price']; ?>">
@@ -66,7 +66,7 @@ $admin_id = $_SESSION['admin_id'];
    <?php
       }
    }else{
-      echo '<p class="empty">no products added yet!</p>';
+      echo '<p class="empty">Продукты ещё не добавлены!</p>';
    }
    ?>
 

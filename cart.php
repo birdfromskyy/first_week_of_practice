@@ -29,7 +29,7 @@ if(isset($_POST['update_qty'])){
    $p_qty = filter_var($p_qty, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
    $update_qty = $conn->prepare("UPDATE `cart` SET quantity = ? WHERE id = ?");
    $update_qty->execute([$p_qty, $cart_id]);
-   $message[] = 'cart quantity updated';
+   $message[] = 'Количество обновлено';
 }
 
 ?>
@@ -66,7 +66,7 @@ if(isset($_POST['update_qty'])){
          while($fetch_cart = $select_cart->fetch(PDO::FETCH_ASSOC)){ 
    ?>
    <form action="" method="POST" class="box">
-      <a href="cart.php?delete=<?= $fetch_cart['id']; ?>" class="fas fa-times" onclick="return confirm('delete this from cart?');"></a>
+      <a href="cart.php?delete=<?= $fetch_cart['id']; ?>" class="fas fa-times" onclick="return confirm('Удалить это из корзины?');"></a>
       <a href="view_page.php?pid=<?= $fetch_cart['pid']; ?>" class="fas fa-eye"></a>
       <img src="uploaded_img/<?= $fetch_cart['image']; ?>" alt="">
       <div class="name"><?= $fetch_cart['name']; ?></div>

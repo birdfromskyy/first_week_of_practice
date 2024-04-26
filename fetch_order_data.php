@@ -16,10 +16,10 @@ if(isset($input['orderId'])) {
         $orderData = $query->fetch(PDO::FETCH_ASSOC);
         echo json_encode($orderData);
     } else {
-        echo json_encode(['error' => 'Order not found']);
+        echo json_encode(['error' => 'Заказ не найден']);
     }
 } else {
-    echo json_encode(['error' => 'Order ID not provided']);
+    echo json_encode(['error' => 'ID заказа не найден']);
 }
 
 ?>

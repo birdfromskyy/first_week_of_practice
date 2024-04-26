@@ -58,7 +58,7 @@ if(isset($_GET['delete'])){
          <p> имя : <span><?= $fetch_users['name']; ?></span></p>
          <p> email : <span><?= $fetch_users['email']; ?></span></p>
          <p> пользователь : <span style=" color:<?php if($fetch_users['user_type'] == 'courier'){ echo 'red'; }; ?>"><?= $fetch_users['user_type']; ?></span></p>
-         <a href="admin_users.php?delete=<?= $fetch_users['id']; ?>" onclick="return confirm('delete this user?');" class="delete-btn">удалить</a>
+         <a href="admin_users.php?delete=<?= $fetch_users['id']; ?>" onclick="return confirm('Удалить этого пользователя?');" class="delete-btn">Удалить</a>
       </div>
       <?php
       }

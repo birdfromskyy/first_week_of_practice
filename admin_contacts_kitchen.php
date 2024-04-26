@@ -62,12 +62,7 @@ if (isset($_GET['delete'])) {
                         <p> number : <span><?= $fetch_message['number']; ?></span> </p>
                         <p> email : <span><?= $fetch_message['email']; ?></span> </p>
                         <p> message : <span><?= $fetch_message['message']; ?></span> </p>
-                        <?php if ($fetch_user) : ?>
-                            <p> пользователь : <span><?= $fetch_user['user_type']; ?></span></p>
-                        <?php else : ?>
-                            <p> пользователь : <span>Не найден</span></p>
-                        <?php endif; ?>
-                        <a href="admin_contacts_kitchen.php?delete=<?= $fetch_message['id']; ?>" onclick="return confirm('delete this message?');" class="delete-btn">Удалить</a>
+                        <a href="admin_contacts_kitchen.php?delete=<?= $fetch_message['id']; ?>" onclick="return confirm('Удалить это сообщение?');" class="delete-btn">Удалить</a>
                     </div>
             <?php
                 }

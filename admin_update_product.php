@@ -24,7 +24,7 @@ if(isset($_POST['update_product'])){
    $details = $_POST['details'];
    $details = filter_var($details, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
 
-  
+
    if(isset($_FILES['image']['name']) && !empty($_FILES['image']['name'])) {
       $image = $_FILES['image']['name'];
       $image = filter_var($image, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
@@ -32,15 +32,15 @@ if(isset($_POST['update_product'])){
       $image_tmp_name = $_FILES['image']['tmp_name'];
       $image_folder = 'uploaded_img/'.$image;
    } else {
-    
+   
       $image = $_POST['old_image'];
    }
 
-  
+
    $update_product = $conn->prepare("UPDATE `products` SET name = ?, category = ?, details = ?, price = ?, image = ? WHERE id = ?");
    $update_product->execute([$name, $category, $details, $price, $image, $pid]);
 
-  
+
    $message[] = 'Продукт успешно обновлен!';
 
    if(isset($_FILES['image']['name']) && !empty($_FILES['image']['name'])) {
@@ -71,7 +71,7 @@ if(isset($_POST['update_product'])){
    <meta name="viewport" content="width=device-width, initial-scale=1.0">
    <title>update products</title>
 
-  
+
    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
 
    
@@ -116,7 +116,7 @@ if(isset($_POST['update_product'])){
    <?php
          }
       }else{
-         echo '<p class="empty">no products found!</p>';
+         echo '<p class="empty">Продукты не найдены!</p>';
       }
    ?>
 
